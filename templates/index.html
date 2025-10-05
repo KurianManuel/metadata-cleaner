@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata Cleaner</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Metadata Cleaner</h1>
+        <p class="subtitle">Remove EXIF data and metadata from your images</p>
+        
+        <form method="POST" enctype="multipart/form-data" id="uploadForm">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📤</div>
+                <p class="upload-text">Click to upload an image</p>
+                <p class="upload-subtext">PNG, JPG, JPEG, GIF, BMP, TIFF</p>
+                <input type="file" name="file" id="fileInput" accept="image/*" required>
+                <div class="file-name" id="fileName"></div>
+            </div>
+            
+            <button type="submit" id="submitBtn">Clean Metadata</button>
+        </form>
+        
+        <div class="info">
+            <strong>What this does:</strong><br>
+            Removes all metadata including EXIF data, GPS location, camera info, and timestamps from your images.
+        </div>
+    </div>
+    
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
