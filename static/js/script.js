@@ -1,16 +1,16 @@
-// Get DOM elements
+
 const fileInput = document.getElementById('fileInput');
 const fileName = document.getElementById('fileName');
 const submitBtn = document.getElementById('submitBtn');
 const uploadArea = document.getElementById('uploadArea');
 const uploadForm = document.getElementById('uploadForm');
 
-// Click upload area to trigger file input
+
 uploadArea.addEventListener('click', function() {
     fileInput.click();
 });
 
-// Display selected file name
+
 fileInput.addEventListener('change', function() {
     if (this.files && this.files[0]) {
         fileName.textContent = '📄 ' + this.files[0].name;
@@ -18,13 +18,57 @@ fileInput.addEventListener('change', function() {
     }
 });
 
-// Handle form submission
-uploadForm.addEventListener('submit', function() {
+
+uploadForm.addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    
     submitBtn.textContent = 'Processing...';
     submitBtn.disabled = true;
+    
+    
+    const formData = new FormData(uploadForm);
+    
+    
+    fetch('/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Upload failed');
+        }
+        return response.blob();
+    })
+    .then(blob => {
+        
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cleaned_' + fileInput.files[0].name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        
+        
+        submitBtn.textContent = 'Clean Metadata';
+        submitBtn.disabled = false;
+        fileName.textContent = '';
+        fileInput.value = '';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        submitBtn.textContent = 'Error - Try Again';
+        submitBtn.disabled = false;
+        
+        
+        setTimeout(function() {
+            submitBtn.textContent = 'Clean Metadata';
+        }, 2000);
+    });
 });
 
-// Drag and drop functionality (bonus feature!)
+
 uploadArea.addEventListener('dragover', function(e) {
     e.preventDefault();
     uploadArea.style.borderColor = '#764ba2';
