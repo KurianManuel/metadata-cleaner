@@ -219,7 +219,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Kurian Manuel**
 
-- 🔗 [GitHub: @KurianManuel](https://github.com/KurianManuel)
+- 🔗 [GitHub](https://github.com/KurianManuel)
 - 💼 [LinkedIn](https://linkedin.com/in/kurian-manuel)
 - 📧 [Email](kurianmanuel.2288@gmail.com)
 
